@@ -1,0 +1,29 @@
+#
+#  auth:
+#    token:
+#      realm: "https://auth.import.pw/auth"
+#      service: "Docker registry"
+#      issuer: "import.pw auth server"
+#      rootcertbundle: "/path/to/server.pem"
+
+server:
+  addr: ":5001"
+
+token:
+  issuer: "import.pw auth server"
+  expiration: 900
+  certificate: "/etc/auth-cert.pem"
+  key: "/etc/auth-key.pem"
+
+# Password is specified as a BCrypt hash. Use `htpasswd -nB USERNAME` to generate.
+users:
+  "REGISTRY_AUTH_USERNAME": {password: "REGISTRY_AUTH_PASSWORD"}
+  "": {}
+
+acl:
+  - match: {account: "REGISTRY_AUTH_USERNAME"}
+    actions: ["*"]
+    comment: "REGISTRY_AUTH_USERNAME can do everything."
+  - match: {account: ""}
+    actions: ["pull"]
+    comment: "Anonymous users can pull all repos."

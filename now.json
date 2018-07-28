@@ -1,0 +1,15 @@
+{
+  "type": "docker",
+  "alias": "auth.import.pw",
+  "build": {
+    "env": {
+      "REGISTRY_AUTH_USERNAME": "@importpw-registry-auth-username",
+      "REGISTRY_AUTH_PASSWORD": "@importpw-registry-auth-password",
+      "REGISTRY_AUTH_CERT": "@importpw-registry-auth-cert",
+      "REGISTRY_AUTH_KEY": "@importpw-registry-auth-key"
+    }
+  },
+  "features": {
+    "cloud": "v2"
+  }
+}
